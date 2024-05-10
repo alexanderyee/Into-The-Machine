@@ -1,0 +1,489 @@
+[gd_scene load_steps=21 format=3 uid="uid://bvhj30600hi76"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_fc7ui"]
+[ext_resource type="PackedScene" uid="uid://d1fwjuqb0fj1w" path="res://Models/kenney_blasterKit/Models/GLTF format/blasterN.glb" id="2_2fa6p"]
+[ext_resource type="Script" path="res://Weapons_Manager.gd" id="2_dnexi"]
+[ext_resource type="Resource" uid="uid://dgtc4cvf3jksa" path="res://Weapon Resources/blasterN.tres" id="3_0jt24"]
+[ext_resource type="Resource" uid="uid://d2xq1djdknrdw" path="res://Weapon Resources/blasterB.tres" id="4_qyffg"]
+[ext_resource type="PackedScene" uid="uid://dtihxxu6oncxq" path="res://Models/kenney_blasterKit/Models/GLTF format/blasterB.glb" id="5_1fd5k"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fswaq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oku2h"]
+
+[sub_resource type="Animation" id="Animation_avuh0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterN2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.56129, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterN2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blasterN2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -2.00151, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("blasterB2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.32937, -1.41009, -0.718431)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("blasterB2:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.56503, -3.01443, 0.127157)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("blasterB2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4twt8"]
+resource_name = "blasterN Activate"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterN2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.274449, -0.983754, -0.655104), Vector3(0.274449, -0.333864, -0.655104)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterN2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 6.28319, 0), Vector3(0, 3.06464, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blasterN2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_0pux0"]
+resource_name = "blasterN Deactivate"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterN2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.274449, -0.333864, -0.655104), Vector3(0.0422345, -0.663017, -0.398144)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterN2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.06464, 0), Vector3(0, 4.44361, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blasterN2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_5hba3"]
+resource_name = "blasterN OOA"
+length = 0.08
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterN2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.274449, -0.333864, -0.655104), Vector3(0.274449, -0.333864, -0.605132), Vector3(0.274449, -0.333864, -0.655104)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterN2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.06464, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_765vq"]
+resource_name = "blasterN Reload"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterN2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.12, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.274449, -0.333864, -0.655104), Vector3(0.274449, -0.296006, -0.655104), Vector3(0.274449, -0.145059, -0.655104), Vector3(0.274449, -0.333864, -0.655104)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterN2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.12, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.0648, 0), Vector3(-0.164948, 3.06374, 0.0180448), Vector3(-0.66756, 3.04375, 0.0659288), Vector3(-6.28319, 3.0648, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ocjdh"]
+resource_name = "blasterN Shoot"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterN2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.05, 0.08, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.274449, -0.333864, -0.655104), Vector3(0.274449, -0.333864, -0.638269), Vector3(0.274449, -0.333864, -0.615727), Vector3(0.274449, -0.333864, -0.571391), Vector3(0.274449, -0.333864, -0.655104)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterN2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.08, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.0648, 0), Vector3(-0.0547932, 3.06444, 0.00425156), Vector3(-0.136983, 3.06391, 0.0106289), Vector3(0, 3.0648, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qjbav"]
+resource_name = "blasterB Activate"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterB2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.32937, -1.12885, -0.718431), Vector3(0.347947, -0.283001, -0.767251)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterB2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.44872, -1.60334, 1.55993), Vector3(1.00752, -2.93865, 0.162837), Vector3(-0.050501, -3.03362, -0.0148977)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blasterB2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="Animation_6bvcc"]
+resource_name = "blasterB Deactivate"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterB2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.347947, -0.283001, -0.767251), Vector3(0.347947, -1.13786, -0.767251)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterB2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.050501, -3.03362, -0.0148977), Vector3(1.46275, -1.6335, 1.4983)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blasterB2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_b2mdl"]
+resource_name = "blasterB Shoot"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterB2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.347947, -0.283001, -0.767251), Vector3(0.347947, -0.0618584, -0.656283), Vector3(0.347947, -0.283001, -0.767251)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterB2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.050501, -3.03362, -0.0148977), Vector3(-0.67606, -3.00318, -0.0963711), Vector3(-0.050501, -3.03362, -0.0148977), Vector3(-0.6247, -3.00852, -0.0875579)]
+}
+
+[sub_resource type="Animation" id="Animation_0rul1"]
+resource_name = "blasterB OOA"
+length = 0.08
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterB2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.347947, -0.283001, -0.767251), Vector3(0.347947, -0.283001, -0.690417), Vector3(0.347947, -0.283001, -0.767251)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterB2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.050501, -3.03362, -0.0148977)]
+}
+
+[sub_resource type="Animation" id="Animation_uwfq5"]
+resource_name = "blasterB Reload"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blasterB2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.347947, -0.283001, -0.767251)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blasterB2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.050501, -3.03362, -0.0148977), Vector3(-3.19221, -3.03338, -0.015708), Vector3(-6.3338, -3.03338, -0.015708)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e1fx0"]
+_data = {
+"RESET": SubResource("Animation_avuh0"),
+"blasterB Activate": SubResource("Animation_qjbav"),
+"blasterB Deactivate": SubResource("Animation_6bvcc"),
+"blasterB OOA": SubResource("Animation_0rul1"),
+"blasterB Reload": SubResource("Animation_uwfq5"),
+"blasterB Shoot": SubResource("Animation_b2mdl"),
+"blasterN Activate": SubResource("Animation_4twt8"),
+"blasterN Deactivate": SubResource("Animation_0pux0"),
+"blasterN OOA": SubResource("Animation_5hba3"),
+"blasterN Reload": SubResource("Animation_765vq"),
+"blasterN Shoot": SubResource("Animation_ocjdh")
+}
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_fc7ui")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.493432, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_fswaq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.493432, 0)
+shape = SubResource("CapsuleShape3D_oku2h")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25405, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="Flashlight" type="SpotLight3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0103048, -0.701)
+light_color = Color(1, 0.913725, 0.768627, 1)
+light_energy = 0.8
+light_bake_mode = 1
+spot_range = 30.0
+spot_attenuation = 2.0
+spot_angle = 50.0
+
+[node name="Weapons_Manager" type="Node3D" parent="Head/Camera3D"]
+script = ExtResource("2_dnexi")
+_weapon_resources = Array[Resource("res://Scripts/weapon_resource.gd")]([ExtResource("3_0jt24"), ExtResource("4_qyffg")])
+Start_Weapons = Array[String](["blasterN", "blasterB"])
+
+[node name="FPS_Rig" type="Node3D" parent="Head/Camera3D/Weapons_Manager"]
+
+[node name="blasterN2" parent="Head/Camera3D/Weapons_Manager/FPS_Rig" instance=ExtResource("2_2fa6p")]
+transform = Transform3D(-0.417519, 0, -0.908668, 0, 1, 0, 0.908668, 0, -0.417519, 0, -1.56129, 0)
+visible = false
+
+[node name="blasterB2" parent="Head/Camera3D/Weapons_Manager/FPS_Rig" instance=ExtResource("5_1fd5k")]
+transform = Transform3D(-0.999999, 2.98023e-08, -0.000731358, 0.000731346, 0.00572047, -0.999983, 4.15742e-06, -0.999984, -0.00572047, 0.32937, -1.41009, -0.718431)
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera3D/Weapons_Manager/FPS_Rig"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_e1fx0")
+}
+
+[connection signal="animation_finished" from="Head/Camera3D/Weapons_Manager/FPS_Rig/AnimationPlayer" to="Head/Camera3D/Weapons_Manager" method="_on_animation_player_animation_finished"]

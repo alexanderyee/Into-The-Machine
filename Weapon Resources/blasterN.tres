@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://dgtc4cvf3jksa"]
+
+[ext_resource type="Script" path="res://Scripts/weapon_resource.gd" id="1_qdy5u"]
+
+[resource]
+script = ExtResource("1_qdy5u")
+Weapon_Name = "blasterN"
+Activate_Anim = "blasterN Activate"
+Shoot_Anim = "blasterN Shoot"
+Reload_Anim = "blasterN Reload"
+Deactivate_Anim = "blasterN Deactivate"
+Out_Of_Ammo_Anim = "blasterN OOA"
+Current_Ammo = 10
+Reserve_Ammo = 10
+Magazine = 10
+Max_Ammo = 20
+Auto_Fire = false
