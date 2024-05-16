@@ -5,18 +5,19 @@ signal Update_Ammo
 signal Update_Weapon_Stack
 
 @onready var Animation_Player = get_node("%AnimationPlayer")
+@onready var bullet_point = get_node("%Bullet_Point")
 
+var debug_bullet = preload("res://bullet_debug.tscn")
 var Current_Weapon = null
-
 var Weapon_Stack = [] # current weapons held by player
-
 var Weapon_Indicator = 0
 var Next_Weapon: String
 var Weapon_List = {}
 
 @export var _weapon_resources: Array[Weapon_Resource]
-
 @export var Start_Weapons: Array[String]
+
+enum {NULL, HITSCAN, PROJECTILE}
 
 func _ready():
 	Initialize(Start_Weapons) # enter the state machine
@@ -84,6 +85,14 @@ func shoot():
 		Animation_Player.play(Current_Weapon.Shoot_Anim)
 		Current_Weapon.Current_Ammo -= 1
 		emit_signal("Update_Ammo", [Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
+		var camera_collision = get_camera_collision()
+		match Current_Weapon.Type:
+			NULL:
+				print("Weapon type not chosen!")
+			HITSCAN:
+				hitscan_collision(camera_collision)
+			PROJECTILE:
+				pass
 	else:
 		reload()
 	
@@ -94,11 +103,44 @@ func reload():
 		if Current_Weapon.Reserve_Ammo != 0:
 			Animation_Player.play(Current_Weapon.Reload_Anim)
 			var Reload_Amount = min(
-				Current_Weapon.Magazine - Current_Weapon.Current_Ammo,
-				Current_Weapon.Reserve_Ammo)
+					Current_Weapon.Magazine - Current_Weapon.Current_Ammo,
+					Current_Weapon.Reserve_Ammo)
 			Current_Weapon.Current_Ammo += Reload_Amount
 			Current_Weapon.Reserve_Ammo -= Reload_Amount
 			
 			emit_signal("Update_Ammo", [Current_Weapon.Current_Ammo, Current_Weapon.Reserve_Ammo])
 		else:
 			Animation_Player.play(Current_Weapon.Out_Of_Ammo_Anim)
+
+func get_camera_collision() -> Vector3:
+	var camera = get_viewport().get_camera_3d()
+	var viewport = get_viewport().get_size()
+	var ray_origin = camera.project_ray_origin(viewport / 2)
+	var ray_end = ray_origin + camera.project_ray_normal(viewport / 2) * Current_Weapon.Weapon_Range
+	var new_intersection = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	var intersection = get_world_3d().direct_space_state.intersect_ray(new_intersection)
+	
+	if not intersection.is_empty():
+		var collision_point = intersection.position
+		return collision_point
+	else:
+		return ray_end
+
+func hitscan_collision(collision_point):
+	var bullet_point_origin = bullet_point.global_position
+	var bullet_direction = (collision_point - bullet_point_origin).normalized()
+	var new_intersection = PhysicsRayQueryParameters3D.create(bullet_point_origin, collision_point + bullet_direction * 2)
+	var bullet_collision = get_world_3d().direct_space_state.intersect_ray(new_intersection)
+	
+	if bullet_collision:
+		var hit_indicator = debug_bullet.instantiate()
+		var world = get_tree().get_root().get_child(0)
+		world.add_child(hit_indicator)
+		hit_indicator.global_translate(bullet_collision.position)
+		
+		hitscan_damage(bullet_collision.collider)
+		
+func hitscan_damage(collider):
+	if collider.is_in_group("target") and collider.has_method("hit_successful"):
+		print("hit")
+		collider.hit_successful(Current_Weapon.Damage)
