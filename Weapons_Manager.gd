@@ -14,6 +14,8 @@ var Weapon_Indicator = 0
 var Next_Weapon: String
 var Weapon_List = {}
 
+var collision_exclusion = []
+
 @export var _weapon_resources: Array[Weapon_Resource]
 @export var Start_Weapons: Array[String]
 
@@ -80,7 +82,7 @@ func _on_animation_player_animation_finished(anim_name):
 		
 
 func shoot():
-	# animation length enforces fire rate
+	# animation length dictates fire rate
 	if Current_Weapon.Current_Ammo != 0 and !Animation_Player.is_playing():
 		Animation_Player.play(Current_Weapon.Shoot_Anim)
 		Current_Weapon.Current_Ammo -= 1
@@ -92,7 +94,7 @@ func shoot():
 			HITSCAN:
 				hitscan_collision(camera_collision)
 			PROJECTILE:
-				pass
+				launch_projectile(camera_collision)
 	else:
 		reload()
 	
@@ -129,18 +131,36 @@ func get_camera_collision() -> Vector3:
 func hitscan_collision(collision_point):
 	var bullet_point_origin = bullet_point.global_position
 	var bullet_direction = (collision_point - bullet_point_origin).normalized()
+	# we multiply by two to make the vector a bit longer, to ensure we get the intersection
 	var new_intersection = PhysicsRayQueryParameters3D.create(bullet_point_origin, collision_point + bullet_direction * 2)
+	new_intersection.set_exclude(collision_exclusion)
 	var bullet_collision = get_world_3d().direct_space_state.intersect_ray(new_intersection)
 	
 	if bullet_collision:
+		# add a visual indicator for where the bullet hit
 		var hit_indicator = debug_bullet.instantiate()
 		var world = get_tree().get_root().get_child(0)
 		world.add_child(hit_indicator)
 		hit_indicator.global_translate(bullet_collision.position)
 		
-		hitscan_damage(bullet_collision.collider)
+		hitscan_damage(bullet_collision.collider, bullet_direction, bullet_collision.position)
 		
-func hitscan_damage(collider):
+func hitscan_damage(collider, direction, position):
 	if collider.is_in_group("target") and collider.has_method("hit_successful"):
-		print("hit")
-		collider.hit_successful(Current_Weapon.Damage)
+		collider.hit_successful(Current_Weapon.Damage, direction, position)
+
+func launch_projectile(point: Vector3):
+	var direction = (point - bullet_point.global_position).normalized()
+	var projectile = Current_Weapon.projectile_to_load.instantiate()
+	
+	var projectile_rid = projectile.get_rid()
+	collision_exclusion.push_front(projectile_rid)
+	projectile.tree_exited.connect(remove_exclusion.bind(projectile_rid))
+	
+	bullet_point.add_child(projectile)
+	projectile.damage = Current_Weapon.Damage
+	projectile.set_linear_velocity(direction * Current_Weapon.projectile_velocity)
+	
+func remove_exclusion(projectile_rid):
+	collision_exclusion.erase(projectile_rid)
+	

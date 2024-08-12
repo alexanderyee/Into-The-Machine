@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://dgtc4cvf3jksa"]
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=3 format=3 uid="uid://dgtc4cvf3jksa"]
 
+[ext_resource type="PackedScene" uid="uid://dx8340e3kaxxt" path="res://bullet.tscn" id="1_o08j3"]
 [ext_resource type="Script" path="res://Scripts/weapon_resource.gd" id="1_qdy5u"]
 
 [resource]
@@ -10,11 +11,13 @@ Shoot_Anim = "blasterN Shoot"
 Reload_Anim = "blasterN Reload"
 Deactivate_Anim = "blasterN Deactivate"
 Out_Of_Ammo_Anim = "blasterN OOA"
-Current_Ammo = 10
-Reserve_Ammo = 10
-Magazine = 10
-Max_Ammo = 20
+Current_Ammo = 30
+Reserve_Ammo = 90
+Magazine = 30
+Max_Ammo = 120
 Auto_Fire = true
-Type = 1
 Weapon_Range = 2000
 Damage = 1
+Type = 2
+projectile_to_load = ExtResource("1_o08j3")
+projectile_velocity = 100

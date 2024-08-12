@@ -566,6 +566,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25405, 0)
 
 [node name="Flashlight" type="SpotLight3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0103048, -0.701)
+visible = false
 light_color = Color(1, 0.913725, 0.768627, 1)
 light_energy = 0.8
 light_bake_mode = 1

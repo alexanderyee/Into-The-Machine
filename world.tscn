@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://b7t6ikjmh0qki"]
+[gd_scene load_steps=14 format=3 uid="uid://b7t6ikjmh0qki"]
 
 [ext_resource type="PackedScene" uid="uid://bvhj30600hi76" path="res://player.tscn" id="1_7tf1v"]
-[ext_resource type="Script" path="res://Scripts/physics_target.gd" id="2_vtsx0"]
+[ext_resource type="Script" path="res://rigid_body_physics_target_.gd" id="3_ikkny"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22f52"]
 albedo_color = Color(1, 0.447059, 0.929412, 1)
@@ -34,13 +34,19 @@ albedo_color = Color(0.603922, 0.423529, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxkbq"]
 albedo_color = Color(0.301961, 0.764706, 0.388235, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6g2ts"]
+albedo_color = Color(1, 0.509804, 0.270588, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_53im0"]
+
 [node name="World" type="Node3D"]
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="." groups=["target"]]
-transform = Transform3D(3.99979, 0, 0, 0, 1.05812, 0, 0, 0, 3.67824, -6.05767, 0.055068, 8.58817)
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(0.783022, 0, 0, 0, 0.618173, 0, 0, 0, 0.889288, -6.68335, -0.164465, 8.58817)
 use_collision = true
+collision_layer = 7
+collision_mask = 7
 material = SubResource("StandardMaterial3D_22f52")
-script = ExtResource("2_vtsx0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -76,3 +82,15 @@ transform = Transform3D(39.0364, 0, 0, 0, 0.125, 0, 0, 0, 35.675, 0, -0.4995, 0)
 use_collision = true
 size = Vector3(1, 0.001, 1)
 material = SubResource("StandardMaterial3D_qxkbq")
+
+[node name="box1" type="RigidBody3D" parent="." groups=["target"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.783992, 1.45986, 4.14409)
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("3_ikkny")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="box1"]
+material = SubResource("StandardMaterial3D_6g2ts")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box1"]
+shape = SubResource("BoxShape3D_53im0")

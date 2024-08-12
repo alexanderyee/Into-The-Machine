@@ -1,6 +1,6 @@
 extends CSGBox3D
 
-var health = 5
+var health = 99
 
 func hit_successful(damage):
 	health -= damage
