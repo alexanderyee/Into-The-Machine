@@ -1,6 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7t6ikjmh0qki"]
+[gd_scene load_steps=16 format=3 uid="uid://b7t6ikjmh0qki"]
 
 [ext_resource type="PackedScene" uid="uid://bvhj30600hi76" path="res://player.tscn" id="1_7tf1v"]
+[ext_resource type="MeshLibrary" uid="uid://d7e24bai3yt5" path="res://level generation/DungeonTiles.tres" id="3_5q8pm"]
+[ext_resource type="Script" path="res://level generation/dun_gen.gd" id="3_bvbe8"]
 [ext_resource type="Script" path="res://rigid_body_physics_target_.gd" id="3_ikkny"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22f52"]
@@ -42,7 +44,7 @@ albedo_color = Color(1, 0.509804, 0.270588, 1)
 [node name="World" type="Node3D"]
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(0.783022, 0, 0, 0, 0.618173, 0, 0, 0, 0.889288, -6.68335, -0.164465, 8.58817)
+transform = Transform3D(2.65868, 0, 0, 0, 0.396933, 0, 0, 0, 2.57052, -6.68335, -0.318864, 8.58817)
 use_collision = true
 collision_layer = 7
 collision_mask = 7
@@ -94,3 +96,11 @@ material = SubResource("StandardMaterial3D_6g2ts")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="box1"]
 shape = SubResource("BoxShape3D_53im0")
+
+[node name="DunGen" type="Node3D" parent="."]
+script = ExtResource("3_bvbe8")
+
+[node name="GridMap" type="GridMap" parent="DunGen"]
+mesh_library = ExtResource("3_5q8pm")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
