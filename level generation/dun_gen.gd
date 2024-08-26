@@ -6,7 +6,8 @@ extends Node3D
 @export var start : bool = false : set = set_start
 func set_start(val:bool) -> void:
 	generate()
-	
+
+# border size is the size of the outermost layer	
 @export var border_size : int = 20 : set = set_border_size
 func set_border_size(val : int) -> void:
 	border_size = val
@@ -14,35 +15,34 @@ func set_border_size(val : int) -> void:
 	if Engine.is_editor_hint():
 		visualize_border()
 
-@export var num_rooms : int = 4
-@export var room_margin : int = 1 # min space between rooms
-@export var room_recursion_limit : int = 15 # max num attempts to generate rooms
+@export var num_layers : int = 4
+@export var layer_margin : int = 4
 @export var min_room_size : int = 2
 @export var max_room_size : int = 4
-
+@export var room_margin : int = 4 # min space between secret rooms
+@export var spawn_position : Vector3i = Vector3i(-1, 0, 10)
 var room_tiles : Array[PackedVector3Array] = []
 var room_positions : PackedVector3Array = []
 
+
 func visualize_border():
 	grid_map.clear()
-	for i in range(-1, border_size + 1):
-		# north edge
-		grid_map.set_cell_item(Vector3i(i, 0, -1), 3)
-		# south edge
-		grid_map.set_cell_item(Vector3i(i, 0, border_size), 3)
-		# east edge
-		grid_map.set_cell_item(Vector3i(border_size, 0, i), 3)
-		# west edge
-		grid_map.set_cell_item(Vector3i(-1, 0, i), 3)
-		
+	for layer in range(num_layers):
+		var layer_padding = layer * layer_margin
+		for i in range(-1 + layer_padding, border_size + 1 - layer_padding):
+			#TODO: enums for gridmap cell items?
+			# north edge
+			grid_map.set_cell_item(Vector3i(i , 0, -1 + layer_padding), 0)
+			# south edge
+			grid_map.set_cell_item(Vector3i(i, 0, border_size - layer_padding), 0)
+			# east edge
+			grid_map.set_cell_item(Vector3i(border_size - layer_padding, 0, i), 0)
+			# west edge
+			grid_map.set_cell_item(Vector3i(-1 + layer_padding, 0, i), 0)
+	grid_map.set_cell_item(spawn_position, 4)
 	
 func generate():
-	room_tiles.clear()
-	room_positions.clear()
 	visualize_border()
-	for i in num_rooms:
-		make_room(room_recursion_limit) # TODO probably a smarter way to do this
-	print(room_positions)
 	
 func make_room(rec : int):
 	if rec <= 0:
