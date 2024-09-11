@@ -102,9 +102,6 @@ shape = SubResource("BoxShape3D_53im0")
 
 [node name="DunGen" type="Node3D" parent="."]
 script = ExtResource("3_bvbe8")
-num_layers = 3
-room_margin = 3
-spawn_position = null
 
 [node name="GridMap" type="GridMap" parent="DunGen"]
 mesh_library = ExtResource("3_5q8pm")

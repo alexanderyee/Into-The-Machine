@@ -11,6 +11,7 @@ border_size = 19
 num_layers = 7
 layer_margin = 3
 spawn_position = Vector3i(-1, 0, 9)
+shape = &"Square"
 
 [node name="GridMap" type="GridMap" parent="DunGen"]
 mesh_library = ExtResource("2_lu07x")
